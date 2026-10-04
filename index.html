@@ -1,444 +1,579 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ponthita Bamrungaur | Portfolio & Projects</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>ร้านเปิบพิสดาร | เมนูสุดสยองขวัญ</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 3s linear infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #a855f7, 0 0 20px #a855f7' },
+                            '100%': { textShadow: '0 0 2px #fff, 0 0 5px #fff, 0 0 10px #a855f7, 0 0 15px #a855f7' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-deep: #0a0b10;
-            --surface: rgba(255, 255, 255, 0.03);
-            --surface-hover: rgba(255, 255, 255, 0.07);
-            --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(99, 102, 241, 0.5);
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.3);
-            --accent: #ec4899;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+        body { font-family: 'Prompt', sans-serif; }
+        .neon-border-purple { border-color: rgba(168, 85, 247, 0.5); }
+        .neon-border-purple:hover { 
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.7);
+            border-color: rgba(168, 85, 247, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .neon-border-rose { border-color: rgba(225, 29, 72, 0.5); }
+        .neon-border-rose:hover { 
+            box-shadow: 0 0 20px rgba(225, 29, 72, 0.7);
+            border-color: rgba(225, 29, 72, 1);
         }
-
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+        .neon-border-green { border-color: rgba(34, 197, 94, 0.5); }
+        .neon-border-green:hover { 
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.9);
+            border-color: rgba(34, 197, 94, 1);
         }
+        
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
 
-        /* Background Animated Glow Elements */
-        .glow-orb {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        .orb-1 { top: -100px; left: -100px; background: var(--primary); }
-        .orb-2 { bottom: -100px; right: -100px; background: var(--accent); }
-
-        /* Layout Container */
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 1440px;
-            margin: 0 auto;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 60px 80px;
-        }
-
-        /* Header / Hero Section */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 60px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 40px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 50px;
-            color: #818cf8;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .badge span {
-            width: 8px;
-            height: 8px;
-            background: #818cf8;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #818cf8;
-        }
-
-        .status-pill {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 12px 24px;
-            border-radius: 16px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-
-        .card-image-wrapper {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-            background: #151821;
-        }
-
-        .card-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-card:hover .card-image-wrapper img {
-            transform: scale(1.08);
-        }
-
-        .card-image-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(10, 11, 16, 0.8));
-        }
-
-        .card-body {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            justify-content: space-between;
-        }
-
-        .card-category {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #818cf8;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .action-link {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #ffffff;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.3s ease;
-        }
-
-        .project-card:hover .action-link {
-            gap: 12px;
-            color: #818cf8;
-        }
-
-        .external-icon {
-            opacity: 0.5;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover .external-icon {
-            opacity: 1;
-        }
-
-        /* Featured Span Card Styling */
-        .featured-span {
-            grid-column: span 3;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.04));
-            border-color: rgba(99, 102, 241, 0.2);
-            flex-direction: row;
-        }
-
-        .featured-span .card-image-wrapper {
-            width: 45%;
-            height: auto;
-            min-height: 260px;
-        }
-
-        .featured-span .card-body {
-            width: 55%;
-            padding: 40px;
-        }
-
-        /* Hover Card State */
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-hover);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--primary-glow);
-            background: var(--surface-hover);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            color: rgba(148, 163, 184, 0.5);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            padding-top: 30px;
-        }
-
-        /* Responsive */
-        @media(max-width: 1024px) {
-            .projects-grid { grid-template-columns: repeat(2, 1fr); }
-            .featured-span { grid-column: span 2; }
-            .wrapper { padding: 40px 30px; }
-        }
-
-        @media(max-width: 768px) {
-            header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .featured-span { grid-column: span 1; flex-direction: column; }
-            .featured-span .card-image-wrapper, .featured-span .card-body { width: 100%; }
-            .hero-content h1 { font-size: 2.4rem; }
+        .view-section { display: none; }
+        .view-section.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body>
 
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
+<body class="bg-zinc-950 text-zinc-300 antialiased min-h-screen selection:bg-purple-900 selection:text-white relative">
 
-    <div class="wrapper">
-        <!-- Hero Header -->
-        <header>
-            <div class="hero-content">
-                <div class="badge"><span></span> Digital Business Technology Student</div>
-                <h1>Ponthita Bamrungaur</h1>
-                <p>Welcome to my professional showcase. Explore a collection of interactive web applications, tools, and digital solutions designed and developed with modern code.</p>
+    <!-- Background Ambient Glows -->
+    <div class="fixed top-20 left-10 w-96 h-96 bg-purple-900/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-20 right-10 w-96 h-96 bg-rose-900/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-black/80 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.8)] border-b border-purple-900/50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="switchView('menu-view')">
+                <span class="text-3xl drop-shadow-[0_0_10px_rgba(168,85,247,0.8)] group-hover:animate-spin-slow">💀</span>
+                <span class="font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-rose-500 to-green-500 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] hidden sm:block animate-glow">
+                    ร้านเปิบพิสดาร
+                </span>
             </div>
-            <div class="status-pill">
-                📍 North Bangkok University
-            </div>
-        </header>
-
-        <!-- Main Showcase Grid -->
-        <main class="projects-grid">
             
-            <!-- Project 1 -->
-            <a href="https://ponthita.github.io/modern-carousel/" target="_blank" class="project-card">
-                <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Modern Carousel">
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Interactive UI</div>
-                        <div class="card-title">Modern Carousel</div>
-                        <div class="card-desc">Fluid image slider implementation featuring smooth transitions and responsive layouts.</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
-                    </div>
-                </div>
-            </a>
+            <div class="flex gap-2 sm:gap-4">
+                <button onclick="switchView('menu-view')" id="btn-menu" class="nav-btn bg-purple-900/40 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] border border-purple-500/50 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300">
+                    <span>🍽️</span> <span class="hidden sm:inline">เมนู</span>
+                </button>
+                <button onclick="switchView('cart-view')" id="btn-cart" class="nav-btn text-zinc-400 hover:bg-zinc-900 hover:text-white flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 relative">
+                    <span>🛒</span> <span class="hidden sm:inline">ตะกร้า</span>
+                    <span id="cart-badge" class="hidden absolute -top-2 -right-2 bg-rose-600 text-white text-[11px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(225,29,72,0.8)] border border-rose-400">0</span>
+                </button>
+                <button onclick="switchView('history-view')" id="btn-history" class="nav-btn text-zinc-400 hover:bg-zinc-900 hover:text-white flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300">
+                    <span>📜</span> <span class="hidden sm:inline">ประวัติ</span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-            <!-- Project 2 -->
-            <a href="https://ponthita.github.io/BMI/" target="_blank" class="project-card">
-                <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="BMI Calculator">
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Health Utility</div>
-                        <div class="card-title">BMI Calculator</div>
-                        <div class="card-desc">Interactive web application for calculating body mass index with real-time dynamic analysis.</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
-                    </div>
-                </div>
-            </a>
+    <main class="max-w-6xl mx-auto px-4 py-12 pb-24 relative z-10">
+        
+        <!-- ================= MENU VIEW ================= -->
+        <section id="menu-view" class="view-section active">
+            <header class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-4 drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+                    เมนูสุดสยองขวัญสั่นประสาท
+                </h1>
+                <p class="text-zinc-400 text-lg md:text-xl">ยินดีต้อนรับคนใจกล้า ท้าให้ลองรสชาติจากโลกวิญญาณ 🩸</p>
+            </header>
 
-            <!-- Project 3: Open House -->
-            <a href="https://ponthita.github.io/openhouse/" target="_blank" class="project-card">
-                <div class="card-image-wrapper">
-                    <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTAdFC8NXwDtANJeq1kwhLG4Kx7cKzsDJcepDz_BExky-H8fO4pQiGAZs8FqRQFsFUKUot2cVZVcP45cAo" alt="North Bangkok University Open House">
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Event Webpage</div>
-                        <div class="card-title">Open House</div>
-                        <div class="card-desc">Engaging promotional web portal designed for academic institution open house events.</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
-                    </div>
-                </div>
-            </a>
+            <!-- Mystery Button -->
+            <div class="flex justify-center mb-16">
+                <button onclick="generateMysteryMenu()" id="mystery-btn" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 rounded-full border border-green-500/50 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,197,94,0.6)]">
+                    <div class="absolute inset-0 bg-gradient-to-r from-green-900/40 via-transparent to-green-900/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span class="text-2xl animate-bounce-slow">🔮</span>
+                    <span class="font-bold text-lg md:text-xl text-green-300 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+                        สุ่มเมนูลับมิติพิศวง
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Menu Grid Container -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Menu items injected via JS -->
+            </div>
+        </section>
 
-            <!-- Project 4: Web Business Game -->
-            <a href="https://ponthita.github.io/Game-Design-by-Ponthita/" target="_blank" class="project-card">
-                <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Web Business Game">
-                    <div class="card-image-overlay"></div>
+        <!-- ================= CART VIEW ================= -->
+        <section id="cart-view" class="view-section">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-black mb-8 flex items-center gap-3 text-rose-400 drop-shadow-[0_0_15px_rgba(225,29,72,0.6)]">
+                    🛒 ตะกร้าสังเวยของคุณ
+                </h2>
+                
+                <div id="cart-empty" class="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-12 text-center border border-zinc-800 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                    <div class="text-7xl mb-6 opacity-30 grayscale">🛒</div>
+                    <h3 class="text-xl font-bold text-zinc-300 mb-4">ตะกร้ายังว่างเปล่า</h3>
+                    <p class="text-zinc-500 mb-8">ดวงวิญญาณของคุณยังหิวโหย ไปล่าเมนูมาเพิ่มเถอะ</p>
+                    <button onclick="switchView('menu-view')" class="inline-flex items-center gap-2 px-8 py-4 bg-rose-900 hover:bg-rose-700 text-rose-200 border border-rose-500 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.7)]">
+                        กลับไปเลือกเหยื่อ
+                    </button>
                 </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Simulation Game</div>
-                        <div class="card-title">Web Business Game</div>
-                        <div class="card-desc">Strategic digital business simulation game built with interactive web mechanics.</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
-                    </div>
-                </div>
-            </a>
 
-            <!-- Project 5: Chocolate Website -->
-            <a href="https://sites.google.com/northbkk.ac.th/chocolate/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%81" target="_blank" class="project-card">
-                <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80" alt="Chocolate Website">
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Web Project</div>
-                        <div class="card-title">Chocolate Website</div>
-                        <div class="card-desc">An engaging website project dedicated to showcasing chocolate products, information, and business concepts.</div>
+                <div id="cart-content" class="hidden bg-zinc-900/80 backdrop-blur-sm rounded-3xl border border-zinc-800 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden">
+                    <ul id="cart-items-list" class="divide-y divide-zinc-800/50">
+                        <!-- Cart items injected via JS -->
+                    </ul>
+                    <div class="p-8 bg-zinc-950 border-t border-zinc-800">
+                        <div class="flex justify-between items-center mb-8">
+                            <span class="text-zinc-400 font-medium text-lg">ยอดสังเวยรวมทั้งหมด</span>
+                            <span id="cart-total-price" class="text-4xl font-black text-white drop-shadow-[0_0_15px_rgba(225,29,72,0.8)]">
+                                ฿0
+                            </span>
+                        </div>
+                        <button onclick="checkout()" id="checkout-btn" class="w-full flex items-center justify-center gap-3 py-5 bg-gradient-to-r from-rose-900 to-purple-900 border border-rose-500/50 text-white rounded-2xl font-black text-xl hover:from-rose-700 hover:to-purple-700 transition-all shadow-[0_0_30px_rgba(225,29,72,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.7)]">
+                            สังเวยยอดเงิน (ชำระเงิน) 🔪
+                        </button>
                     </div>
-                    <div class="card-footer">
-                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
-                    </div>
                 </div>
-            </a>
+            </div>
+        </section>
 
-            <!-- Project 6: New Project (/p/) -->
-            <a href="https://ponthita.github.io/p/" target="_blank" class="project-card">
-                <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Web Application Project">
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Web Development</div>
-                        <div class="card-title">Web Application Project</div>
-                        <div class="card-desc">A dynamic web application showcasing interactive features and responsive front-end design techniques.</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
-                    </div>
-                </div>
-            </a>
+        <!-- ================= HISTORY VIEW ================= -->
+        <section id="history-view" class="view-section">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-black mb-8 flex items-center gap-3 text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+                    📜 บันทึกกรรม (ประวัติ)
+                </h2>
 
-            <!-- Featured Personal Website Spanning Columns -->
-            <a href="https://sites.google.com/northbkk.ac.th/ponthitabamrungaur/home?authuser=0" target="_blank" class="project-card featured-span">
-                <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Personal Website">
-                    <div class="card-image-overlay"></div>
+                <div id="history-loading" class="text-center p-12 text-zinc-500 animate-pulse text-lg">
+                    กำลังสื่อสารกับโลกวิญญาณ...
                 </div>
-                <div class="card-body">
-                    <div>
-                        <div class="card-category">Core Portfolio</div>
-                        <div class="card-title">Personal Website & Profile Hub</div>
-                        <div class="card-desc">Comprehensive digital portfolio detailing academic achievements, personal background, and full project history.</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="action-link">Visit Main Website <span class="external-icon">↗</span></span>
-                    </div>
+                
+                <div id="history-empty" class="hidden bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-12 text-center border border-zinc-800 shadow-lg">
+                    <div class="text-7xl mb-6 opacity-30">📜</div>
+                    <p class="text-zinc-400 text-lg">สมุดบันทึกกรรมของคุณยังว่างเปล่า... เริ่มสร้างตำนานได้เลย</p>
                 </div>
-            </a>
 
-        </main>
+                <div id="history-list" class="hidden space-y-6">
+                    <!-- History items injected via JS -->
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 Ponthita Bamrungaur. All rights reserved. Built for high-performance desktop displays.</p>
-        </footer>
+    <!-- Modal Notification -->
+    <div id="modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm hidden transition-opacity duration-300 opacity-0">
+        <div class="bg-zinc-900 border border-purple-500/50 rounded-3xl shadow-[0_0_50px_rgba(168,85,247,0.4)] p-8 max-w-sm w-full text-center transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="mx-auto w-16 h-16 bg-purple-950 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(168,85,247,0.5)] border border-purple-800 text-3xl" id="modal-icon">
+                ✨
+            </div>
+            <p id="modal-message" class="text-xl font-bold text-zinc-200 mb-8 leading-relaxed"></p>
+            <button onclick="closeModal()" class="w-full py-4 bg-zinc-800 text-white border border-purple-500/50 rounded-xl font-black hover:bg-purple-600 transition-all hover:shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+                รับทราบ
+            </button>
+        </div>
     </div>
 
+    <!-- Application Logic -->
+    <script type="module">
+        // --- 1. State & Data ---
+        let cart = [];
+        let currentUser = null;
+        let isCheckingOut = false;
+
+        const MENU_ITEMS = [
+            { id: 'm1', name: 'ยำเล็บมือนางพญานาค', price: 350, emoji: '🐍💅', desc: 'เล็บมือนางพญานาคกรุบกรอบ คลุกเคล้าด้วยน้ำยำรสแซ่บจัดจ้าน เปรี้ยวเผ็ดสะท้านบาดาล', class: 'neon-border-purple text-purple-400' },
+            { id: 'm2', name: 'ต้มแซ่บเครื่องในไดโนเสาร์', price: 599, emoji: '🦖🥣', desc: 'เครื่องในทีเร็กซ์ตุ๋นข้ามทศวรรษจนเปื่อยยุ่ยในน้ำซุปต้มแซ่บร้อนระอุราวกับลาวาปะทุ', class: 'neon-border-rose text-rose-400' },
+            { id: 'm3', name: 'ข้าวผัดไข่แมงมุมแม่ม่ายดำ', price: 280, emoji: '🕷️🍳', desc: 'ข้าวผัดสีดำสนิทจากดีหมึก ผัดคู่กับไข่แมงมุมแม่ม่ายดำหนึบหนับ หอมกลิ่นไอแห่งความตาย', class: 'neon-border-green text-green-400' },
+            { id: 'm4', name: 'ไอศกรีมรสลาบเลือด', price: 150, emoji: '🩸🍦', desc: 'ของหวานดับคาวเลือด ไอศกรีมเนื้อเนียนนุ่มรสลาบหมูคั่ว หวานเย็นชื่นใจ ซ่อนเปรี้ยวเผ็ด', class: 'neon-border-rose text-rose-400' },
+            { id: 'm5', name: 'ชาไข่มุกตาปลาหมึกยักษ์', price: 199, emoji: '🐙🧋', desc: 'ชาดำเข้มข้นทะลุมิติ ท็อปปิ้งด้วยดวงตาปลาหมึกยักษ์คราเคนเคี้ยวเพลิน จ้องมองคุณทุกขณะ', class: 'neon-border-purple text-purple-400' }
+        ];
+
+        const words = {
+            prefixes: ['ผัดเผ็ด', 'ยำ', 'ตุ๋นยาจีน', 'ซาซิมิ', 'ย่างเนย', 'สกัดเย็น', 'หมักเกลือ'],
+            ingredients: ['สมองซอมบี้', 'น้ำตาเงือก', 'พิษงูเห่าคิงคอบร้า', 'วิญญาณเร่ร่อน', 'เกล็ดมังกรโบราณ', 'เนื้อเอเลี่ยน', 'รากไม้กินคน'],
+            suffixes: ['โลกันตร์', 'ทะลุมิติ', 'ไร้เงา', 'สยองขวัญ', 'พิฆาตมาร', 'ต้องคำสาป']
+        };
+
+        // --- 2. DOM Elements ---
+        const menuGrid = document.getElementById('menu-grid');
+        const cartEmpty = document.getElementById('cart-empty');
+        const cartContent = document.getElementById('cart-content');
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const cartBadge = document.getElementById('cart-badge');
+        
+        const historyLoading = document.getElementById('history-loading');
+        const historyEmpty = document.getElementById('history-empty');
+        const historyList = document.getElementById('history-list');
+
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalMessage = document.getElementById('modal-message');
+        const modalIcon = document.getElementById('modal-icon');
+
+        // --- 3. Firebase Setup ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by environment
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
+        let db, auth;
+        try {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            initAuth();
+        } catch(e) {
+            console.error("Firebase init failed", e);
+            showModal("การเชื่อมต่อโลกวิญญาณขัดข้อง (Firebase Error)", "❌");
+        }
+
+        async function initAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Auth error:", error);
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                listenToOrders(user.uid);
+            }
+        });
+
+        function listenToOrders(userId) {
+            // RULE 1: Strict paths for private data
+            const ordersRef = collection(db, 'artifacts', appId, 'users', userId, 'orders');
+            
+            // RULE 2: No complex queries. Fetch all, sort in memory.
+            onSnapshot(ordersRef, (snapshot) => {
+                const fetchedOrders = [];
+                snapshot.forEach((doc) => {
+                    fetchedOrders.push({ id: doc.id, ...doc.data() });
+                });
+                
+                // Sort descending by date
+                fetchedOrders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                renderHistory(fetchedOrders);
+                
+            }, (error) => {
+                console.error("Error fetching orders:", error);
+                historyLoading.innerText = "เกิดข้อผิดพลาดในการอ่านบันทึกกรรม";
+            });
+        }
+
+        // --- 4. UI Functions ---
+
+        // Expose functions to window for inline HTML handlers
+        window.switchView = function(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+
+            // Reset Nav styling
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn text-zinc-400 hover:bg-zinc-900 hover:text-white flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 relative";
+            });
+
+            // Set Active Nav styling
+            let activeBtnId = viewId.replace('-view', '');
+            let btn = document.getElementById(`btn-${activeBtnId}`);
+            if(activeBtnId === 'menu') {
+                btn.className = "nav-btn bg-purple-900/40 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] border border-purple-500/50 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300";
+            } else if(activeBtnId === 'cart') {
+                btn.className = "nav-btn bg-rose-900/40 text-rose-400 shadow-[0_0_15px_rgba(225,29,72,0.4)] border border-rose-500/50 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 relative";
+            } else {
+                btn.className = "nav-btn bg-green-900/40 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.4)] border border-green-500/50 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300";
+            }
+        };
+
+        window.showModal = function(msg, icon = "✨", autoClose = true) {
+            modalMessage.innerText = msg;
+            modalIcon.innerText = icon;
+            modal.classList.remove('hidden');
+            // small delay to trigger transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+
+            if(autoClose) {
+                setTimeout(() => closeModal(), 2500);
+            }
+        };
+
+        window.closeModal = function() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        };
+
+        function renderMenu() {
+            menuGrid.innerHTML = '';
+            MENU_ITEMS.forEach(item => {
+                const colorTheme = item.class.split(' ')[0]; // e.g. neon-border-purple
+                const textTheme = item.class.split(' ')[1];
+                
+                const card = document.createElement('div');
+                card.className = `bg-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-800 transition-all duration-500 transform hover:-translate-y-3 flex flex-col group ${colorTheme}`;
+                card.innerHTML = `
+                    <div class="text-7xl text-center mb-6 py-6 bg-zinc-950/80 rounded-xl drop-shadow-[0_10px_15px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500 border border-zinc-800/50">
+                        ${item.emoji}
+                    </div>
+                    <h3 class="font-black text-xl mb-3 ${textTheme} drop-shadow-md">
+                        ${item.name}
+                    </h3>
+                    <p class="text-zinc-400 text-sm flex-grow mb-6 leading-relaxed">
+                        ${item.desc}
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-zinc-800">
+                        <span class="font-bold text-2xl text-zinc-100 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
+                            ฿${item.price}
+                        </span>
+                        <button onclick="addToCart('${item.id}', false)" class="p-3 rounded-xl flex items-center justify-center transition-all active:scale-90 bg-zinc-800 text-zinc-300 hover:bg-white hover:text-black shadow-lg" title="เพิ่มลงตะกร้า">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        </button>
+                    </div>
+                `;
+                menuGrid.appendChild(card);
+            });
+        }
+
+        // --- 5. Cart Logic ---
+
+        window.generateMysteryMenu = function() {
+            const btn = document.getElementById('mystery-btn');
+            btn.classList.add('opacity-75', 'pointer-events-none');
+            
+            setTimeout(() => {
+                const prefix = words.prefixes[Math.floor(Math.random() * words.prefixes.length)];
+                const ingredient = words.ingredients[Math.floor(Math.random() * words.ingredients.length)];
+                const suffix = words.suffixes[Math.floor(Math.random() * words.suffixes.length)];
+                
+                const mysteryItem = {
+                    id: `mystery_${Date.now()}`,
+                    name: `${prefix}${ingredient}${suffix}`,
+                    price: Math.floor(Math.random() * 700) + 300,
+                    emoji: '🔮👻',
+                    desc: 'เมนูลับสุดยอดที่ปรุงขึ้นจากวัตถุดิบปริศนา รสชาติที่ไม่มีใครเคยได้สัมผัส',
+                    class: 'neon-border-green text-green-400'
+                };
+
+                // Add to global items temporarily so cart can find it
+                MENU_ITEMS.push(mysteryItem); 
+                window.addToCart(mysteryItem.id, true);
+                
+                btn.classList.remove('opacity-75', 'pointer-events-none');
+            }, 600);
+        };
+
+        window.addToCart = function(id, isMystery = false) {
+            const item = MENU_ITEMS.find(i => i.id === id);
+            if (!item) return;
+
+            const existing = cart.find(i => i.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            
+            updateCartUI();
+            
+            if (isMystery) {
+                showModal(`ค้นพบเมนูลับ: ${item.name}! เพิ่มลงตะกร้าแล้ว`, '🔮');
+            } else {
+                showModal(`เพิ่ม ${item.name} ลงตะกร้าแล้ว!`, '🛒');
+            }
+        };
+
+        window.removeFromCart = function(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        };
+
+        function updateCartUI() {
+            // Update Badge
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (totalItems > 0) {
+                cartBadge.innerText = totalItems;
+                cartBadge.classList.remove('hidden');
+            } else {
+                cartBadge.classList.add('hidden');
+            }
+
+            // Update Views
+            if (cart.length === 0) {
+                cartEmpty.classList.remove('hidden');
+                cartContent.classList.add('hidden');
+            } else {
+                cartEmpty.classList.add('hidden');
+                cartContent.classList.remove('hidden');
+                
+                cartItemsList.innerHTML = '';
+                let total = 0;
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.qty;
+                    total += itemTotal;
+                    
+                    const li = document.createElement('li');
+                    li.className = "p-6 flex items-center gap-6 hover:bg-zinc-800/50 transition-colors";
+                    li.innerHTML = `
+                        <div class="text-4xl bg-zinc-950 p-4 rounded-2xl shadow-inner border border-zinc-800/50">
+                            ${item.emoji}
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg text-zinc-200">${item.name}</h4>
+                            <div class="text-sm text-zinc-500 mt-1 font-medium">
+                                ฿${item.price} <span class="mx-2 text-zinc-700">×</span> ${item.qty} ชิ้น
+                            </div>
+                        </div>
+                        <div class="text-right flex flex-col items-end gap-3">
+                            <span class="font-black text-xl text-rose-400 drop-shadow-[0_0_5px_rgba(225,29,72,0.5)]">
+                                ฿${itemTotal}
+                            </span>
+                            <button onclick="removeFromCart('${item.id}')" class="text-zinc-600 hover:text-rose-500 p-2 rounded-lg hover:bg-rose-900/40 transition-all border border-transparent hover:border-rose-500/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                            </button>
+                        </div>
+                    `;
+                    cartItemsList.appendChild(li);
+                });
+                
+                cartTotalPrice.innerText = `฿${total}`;
+            }
+        }
+
+        // --- 6. Checkout & History ---
+        window.checkout = async function() {
+            if (cart.length === 0 || !currentUser) return;
+            if (isCheckingOut) return;
+            
+            isCheckingOut = true;
+            const btn = document.getElementById('checkout-btn');
+            btn.innerHTML = 'กำลังทำพิธีกรรม... ⏳';
+            btn.classList.add('opacity-50');
+
+            try {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                const orderData = {
+                    items: cart,
+                    total: total,
+                    date: new Date().toISOString(),
+                    status: 'completed'
+                };
+
+                // RULE 3: Guarded by auth (currentUser check above).
+                // RULE 1: Write to specific user subcollection
+                const ordersRef = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'orders');
+                await addDoc(ordersRef, orderData);
+                
+                cart = [];
+                updateCartUI();
+                switchView('history-view');
+                showModal('ทำพิธีกรรมชำระเงินสำเร็จ! อาหารกำลังถูกเตรียม...', '💀', false);
+                setTimeout(() => closeModal(), 3000);
+            } catch (error) {
+                console.error("Checkout error:", error);
+                showModal('เกิดข้อผิดพลาดจากพลังงานลึกลับ', '❌');
+            } finally {
+                isCheckingOut = false;
+                btn.innerHTML = 'สังเวยยอดเงิน (ชำระเงิน) 🔪';
+                btn.classList.remove('opacity-50');
+            }
+        };
+
+        function renderHistory(orders) {
+            historyLoading.classList.add('hidden');
+            
+            if (orders.length === 0) {
+                historyEmpty.classList.remove('hidden');
+                historyList.classList.add('hidden');
+            } else {
+                historyEmpty.classList.add('hidden');
+                historyList.classList.remove('hidden');
+                historyList.innerHTML = '';
+                
+                orders.forEach(order => {
+                    const dateObj = new Date(order.date);
+                    const formattedDate = dateObj.toLocaleDateString('th-TH') + ' ' + dateObj.toLocaleTimeString('th-TH');
+                    
+                    const div = document.createElement('div');
+                    div.className = "bg-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-800 hover:border-green-900/70 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] transition-all";
+                    
+                    let itemsHtml = order.items.map(item => `
+                        <li class="flex items-center gap-4 text-zinc-300 bg-zinc-950/50 p-3 rounded-xl border border-zinc-800/50">
+                            <span class="text-2xl drop-shadow-md">${item.emoji}</span>
+                            <span class="flex-1 font-medium">${item.name}</span>
+                            <span class="text-zinc-500 font-mono bg-black px-2 py-1 rounded-md border border-zinc-800">x${item.qty}</span>
+                        </li>
+                    `).join('');
+
+                    div.innerHTML = `
+                        <div class="flex flex-wrap justify-between items-start gap-4 mb-6 pb-6 border-b border-zinc-800/60">
+                            <div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-900/30 text-green-400 text-xs font-bold rounded-full mb-3 border border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.2)]">
+                                    ✓ ทำพิธีสำเร็จ
+                                </span>
+                                <p class="text-sm text-zinc-500 font-mono flex items-center gap-2">
+                                    📅 ${formattedDate}
+                                </p>
+                            </div>
+                            <span class="font-black text-2xl text-green-400 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]">
+                                ฿${order.total}
+                            </span>
+                        </div>
+                        <ul class="space-y-3">
+                            ${itemsHtml}
+                        </ul>
+                    `;
+                    historyList.appendChild(div);
+                });
+            }
+        }
+
+        // Initialize App UI
+        renderMenu();
+
+    </script>
 </body>
 </html>
