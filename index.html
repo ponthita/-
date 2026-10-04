@@ -1,1 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponthita Bamrungaur | Portfolio & Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0b10;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-hover: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(99, 102, 241, 0.5);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.3);
+            --accent: #ec4899;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animated Glow Elements */
+        .glow-orb {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .orb-1 { top: -100px; left: -100px; background: var(--primary); }
+        .orb-2 { bottom: -100px; right: -100px; background: var(--accent); }
+
+        /* Layout Container */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px 80px;
+        }
+
+        /* Header / Hero Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 50px;
+            color: #818cf8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .badge span {
+            width: 8px;
+            height: 8px;
+            background: #818cf8;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #818cf8;
+        }
+
+        .status-pill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: #151821;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover .card-image-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .card-image-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(10, 11, 16, 0.8));
+        }
+
+        .card-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #818cf8;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .action-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .project-card:hover .action-link {
+            gap: 12px;
+            color: #818cf8;
+        }
+
+        .external-icon {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .external-icon {
+            opacity: 1;
+        }
+
+        /* Featured Span Card Styling */
+        .featured-span {
+            grid-column: span 3;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.04));
+            border-color: rgba(99, 102, 241, 0.2);
+            flex-direction: row;
+        }
+
+        .featured-span .card-image-wrapper {
+            width: 45%;
+            height: auto;
+            min-height: 260px;
+        }
+
+        .featured-span .card-body {
+            width: 55%;
+            padding: 40px;
+        }
+
+        /* Hover Card State */
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--primary-glow);
+            background: var(--surface-hover);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: rgba(148, 163, 184, 0.5);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+
+        /* Responsive */
+        @media(max-width: 1024px) {
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .featured-span { grid-column: span 2; }
+            .wrapper { padding: 40px 30px; }
+        }
+
+        @media(max-width: 768px) {
+            header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .featured-span { grid-column: span 1; flex-direction: column; }
+            .featured-span .card-image-wrapper, .featured-span .card-body { width: 100%; }
+            .hero-content h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="wrapper">
+        <!-- Hero Header -->
+        <header>
+            <div class="hero-content">
+                <div class="badge"><span></span> Digital Business Technology Student</div>
+                <h1>Ponthita Bamrungaur</h1>
+                <p>Welcome to my professional showcase. Explore a collection of interactive web applications, tools, and digital solutions designed and developed with modern code.</p>
+            </div>
+            <div class="status-pill">
+                📍 North Bangkok University
+            </div>
+        </header>
+
+        <!-- Main Showcase Grid -->
+        <main class="projects-grid">
+            
+            <!-- Project 1 -->
+            <a href="https://ponthita.github.io/modern-carousel/" target="_blank" class="project-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Modern Carousel">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Interactive UI</div>
+                        <div class="card-title">Modern Carousel</div>
+                        <div class="card-desc">Fluid image slider implementation featuring smooth transitions and responsive layouts.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="https://ponthita.github.io/BMI/" target="_blank" class="project-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="BMI Calculator">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Health Utility</div>
+                        <div class="card-title">BMI Calculator</div>
+                        <div class="card-desc">Interactive web application for calculating body mass index with real-time dynamic analysis.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 3: Open House -->
+            <a href="https://ponthita.github.io/openhouse/" target="_blank" class="project-card">
+                <div class="card-image-wrapper">
+                    <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTAdFC8NXwDtANJeq1kwhLG4Kx7cKzsDJcepDz_BExky-H8fO4pQiGAZs8FqRQFsFUKUot2cVZVcP45cAo" alt="North Bangkok University Open House">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Event Webpage</div>
+                        <div class="card-title">Open House</div>
+                        <div class="card-desc">Engaging promotional web portal designed for academic institution open house events.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 4: Web Business Game -->
+            <a href="https://ponthita.github.io/Game-Design-by-Ponthita/" target="_blank" class="project-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Web Business Game">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Simulation Game</div>
+                        <div class="card-title">Web Business Game</div>
+                        <div class="card-desc">Strategic digital business simulation game built with interactive web mechanics.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 5: Chocolate Website -->
+            <a href="https://sites.google.com/northbkk.ac.th/chocolate/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%81" target="_blank" class="project-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80" alt="Chocolate Website">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Web Project</div>
+                        <div class="card-title">Chocolate Website</div>
+                        <div class="card-desc">An engaging website project dedicated to showcasing chocolate products, information, and business concepts.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 6: New Project (/p/) -->
+            <a href="https://ponthita.github.io/p/" target="_blank" class="project-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Web Application Project">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Web Development</div>
+                        <div class="card-title">Web Application Project</div>
+                        <div class="card-desc">A dynamic web application showcasing interactive features and responsive front-end design techniques.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Explore Project <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Featured Personal Website Spanning Columns -->
+            <a href="https://sites.google.com/northbkk.ac.th/ponthitabamrungaur/home?authuser=0" target="_blank" class="project-card featured-span">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Personal Website">
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-category">Core Portfolio</div>
+                        <div class="card-title">Personal Website & Profile Hub</div>
+                        <div class="card-desc">Comprehensive digital portfolio detailing academic achievements, personal background, and full project history.</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="action-link">Visit Main Website <span class="external-icon">↗</span></span>
+                    </div>
+                </div>
+            </a>
+
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Ponthita Bamrungaur. All rights reserved. Built for high-performance desktop displays.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
